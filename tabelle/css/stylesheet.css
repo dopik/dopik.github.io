@@ -1,0 +1,55 @@
+body {
+	display: flex;
+	background-color: #1862EC;
+	justify-content: center;
+	align-content: center;
+	min-height: 90vh;
+	min-width: 90vw;
+}
+
+#scoreBoard {
+	background-color: #342809;
+	border: solid 3px #000000;
+	border-radius: 10px;
+	flex: auto;
+}
+
+#startGame {
+	height: 6em;
+	width: 6em;
+	border: solid 3px #000000;
+	border-radius: 6em;
+	margin: 1em;
+}
+
+#addPlayer {
+	border: solid 3px #000000;
+	border-radius: 6em;
+}
+
+input {
+	background-color: #F7DDD4;
+	color: #000000;
+	min-width: 4em;
+	max-width: 8em;
+	width: auto;
+	height: 1em;
+	margin: 3px;
+	text-align: center;
+	border-radius: 10px;
+}
+
+input.name {
+	background-color: #FD4D0C;
+	border-color: #191970;
+	padding: 2px;
+	color: #000000;
+}
+
+input.sum {
+	background-color: #FCBA12;
+}
+
+button {
+	background-color: #FCBA12;
+}
