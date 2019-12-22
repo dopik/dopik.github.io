@@ -109,7 +109,7 @@ function updateSum() {
 		}
 		score.value = sum
 		
-		if (sum > 10000)
+		if (sum >= 10000)
 			checkWin()
 	}
 	
