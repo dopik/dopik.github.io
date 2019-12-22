@@ -51,6 +51,7 @@ function clearScore() {
 		newInput = document.createElement('input')
 		newInput.disabled = true
 		newInput.className = 'sum scoreRemove'
+		newInput.size = 5
 
 		players[i].appendChild(newInput)
 	}
