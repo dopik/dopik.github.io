@@ -29,6 +29,7 @@ function addPlayer() {
 	newInput.placeholder = 'Spieler ' + anzahl
 	newInput.id = 'name' + anzahl
 	newInput.className = 'name'
+	newInput.size = 8
 	
 	newDiv.appendChild(newInput)
 	newTD.appendChild(newDiv)
@@ -73,7 +74,7 @@ function addScoreRow() {
 		
 		newInput = document.createElement('input')
 		newInput.className = 'score scoreRemove'
-		newInput.length = 5
+		newInput.size = 5
 		newInput.addEventListener('blur', rowFull)
 		
 		players[i].appendChild(newInput)
