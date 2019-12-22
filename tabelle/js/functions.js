@@ -86,13 +86,19 @@ function addScoreRow() {
 	columns.firstElementChild.firstElementChild.lastElementChild.previousElementSibling.focus()
 }
 
-function rowFull() {
+function rowFull() {	
 	updateSum()
+	
+	var newfocus = event.target.parentElement.parentElement.nextElementSibling
+	if (newfocus)
+		newfocus.firstElementChild.lastElementChild.previousElementSibling.focus()
+	
 	var sums = document.getElementsByClassName('sum')
 	for (var i = 0; i < anzahl; i++) {
 		if (sums[i].previousElementSibling.value == '')
 			return
 	}
+	
 	addScoreRow()
 }
 
