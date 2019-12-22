@@ -151,9 +151,11 @@ function startGame() {
 	
 	var buttonAdd = document.getElementById('addPlayer')
 	var buttonAddParent = buttonAdd.parentNode
+	var buttanAddGrandParent = buttonAddParent.parentNode
 	
-	buttonAddParent.removeChild(buttonAdd)
-	buttonAddParent.parentNode.removeChild(buttonAddParent)
+	buttonAdd.remove()
+	buttonAddParent.remove()
+	buttanAddGrandParent.remove()
 	
 	clearScore()
 }
