@@ -10,13 +10,14 @@ body {
 	background-color: #342809;
 	border: solid 3px #000000;
 	border-radius: 10px;
-	flex: auto;
 	max-width: 80vw;
 }
 
 div {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-content: center;
 }
 
 #startGame {
@@ -28,8 +29,10 @@ div {
 }
 
 #addPlayer {
+	margin: 3px;
+	text-align: center;
 	border: solid 3px #000000;
-	border-radius: 6em;
+	border-radius: 1em;
 }
 
 input {
@@ -40,7 +43,7 @@ input {
 	height: 1em;
 	margin: 3px;
 	text-align: center;
-	border-radius: 10px;
+	border-radius: 1em;
 }
 
 input.name {

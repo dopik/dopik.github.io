@@ -44,8 +44,8 @@ function addPlayer() {
 function clearScore() {	
 	var scores = document.getElementsByClassName('scoreRemove')
 
-	for (var i = 0; i < scores.length; i++) {
-		scores[i].parentNode.removeChild(scores[i])
+	while (scores[0]) {
+		scores[0].remove() //scores[i].parentNode.removeChild(scores[i])
 	}
 
 	var players = document.getElementsByClassName('player')
@@ -146,6 +146,8 @@ function checkChoke() {
 function startGame() {
 	var buttonStart = document.getElementById('startGame')
 	buttonStart.innerHTML = 'Next Game'
+	buttonStart.removeEventListener('click', startGame)
+	buttonStart.addEventListener('click', nextGame)
 	
 	var buttonAdd = document.getElementById('addPlayer')
 	var buttonAddParent = buttonAdd.parentNode
@@ -158,7 +160,7 @@ function startGame() {
 
 function nextGame() {
 	var boardColums = document.getElementById('scoreboardColums')
-	boardColums.appendChild(boardColums.children[0])
+	boardColums.appendChild(boardColums.firstElementChild)
 	
 	clearScore()
 }
