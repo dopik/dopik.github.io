@@ -28,6 +28,10 @@ function addPlayer() {
 	
 	players.appendChild(fragment)
 	newPlayer.focus()
+	if (anzahl > 7) {
+		button.innnerHTML = 'Max Spieler'
+		button.disabled = true
+	}
 }
 
 function clearScore() {
@@ -90,7 +94,7 @@ function rowFull() {
 	for (var i = 0; i < anzahl; i++) {
 		if (rowList[i].value == '')
 			return
-		rowList[i].removeEventListener('blur', rowFull)
+		//rowList[i].removeEventListener('blur', rowFull)
 	}
 	addScoreRow()
 }

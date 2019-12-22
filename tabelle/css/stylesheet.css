@@ -3,8 +3,7 @@ body {
 	background-color: #1862EC;
 	justify-content: center;
 	align-content: center;
-	min-height: 90vh;
-	min-width: 90vw;
+	margin-top: 5vh;
 }
 
 #scoreBoard {
@@ -12,6 +11,7 @@ body {
 	border: solid 3px #000000;
 	border-radius: 10px;
 	flex: auto;
+	max-width: 80vw;
 }
 
 #startGame {
@@ -32,7 +32,6 @@ input {
 	color: #000000;
 	min-width: 4em;
 	max-width: 8em;
-	width: auto;
 	height: 1em;
 	margin: 3px;
 	text-align: center;
@@ -44,10 +43,12 @@ input.name {
 	border-color: #191970;
 	padding: 2px;
 	color: #000000;
+	margin-bottom: 0.5em;
 }
 
 input.sum {
 	background-color: #FCBA12;
+	margin-top: 0.5em;
 }
 
 button {
