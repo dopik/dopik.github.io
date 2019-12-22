@@ -62,7 +62,7 @@ function clearScore() {
 }
 
 function addScoreRow() {
-	if (win)
+	if (won)
 		return
 	
 	var players = document.getElementsByClassName('player')
