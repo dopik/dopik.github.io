@@ -29,7 +29,7 @@ function addPlayer() {
 	newInput.placeholder = 'Spieler ' + anzahl
 	newInput.id = 'name' + anzahl
 	newInput.className = 'name'
-	newInput.size = 8
+	newInput.size = '8'
 	
 	newDiv.appendChild(newInput)
 	newTD.appendChild(newDiv)
