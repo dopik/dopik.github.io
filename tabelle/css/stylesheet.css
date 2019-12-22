@@ -13,9 +13,10 @@ body {
 	max-width: 80vw;
 }
 
-div {
+div.player {
 	display: flex;
 	flex-direction: column;
+	align-items: stretch;
 }
 
 #startGame {
