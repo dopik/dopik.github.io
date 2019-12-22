@@ -1,22 +1,17 @@
 <!DOCTYPE html>
 <html>
-	<!-- <script src="" defer> um script am ende zu laden -->
 	<head>
 		<title>Tabelle</title>
 		<script src="js/functions.js"></script>
 		<link rel="stylesheet" href="css/stylesheet.css"></link>
 	</head>
-	<body id="body">
+	<body>
 		<table id="scoreBoard">
-			<tr id="names">
-				<th><input placeholder="Spieler 1" id="name0" class="name" autofocus></input></th>
-				<th><input placeholder="Spieler 2" id="name1" class="name"></input></th>
-				<th id="addPlayerField"><button type="button" id="addPlayer">Spieler hinzufügen</button></th>
+			<tr id="scoreboardColums">
+				<td><div id="player1" class='player'><input id="name1" class="name" placeholder="Spieler 1"></input></div></td>
+				<td><div id="player2" class='player'><input id="name2" class="name" placeholder="Spieler 2"></input></div></td>
+				<td><button id="addPlayer">Spieler hinzufügen</button></td>
 			</tr>
-			<tbody id="scoreArea">
-			</tbody>
-			<tbody id="scoreSum">
-			</tbody>
 		</table>
 		<br>
 		<button type="button" id="startGame">Spiel starten</button>

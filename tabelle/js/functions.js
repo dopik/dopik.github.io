@@ -3,140 +3,164 @@
 document.addEventListener('DOMContentLoaded', init)
 	
 var anzahl = 2;
-var row
 
 function init() {
 	document.getElementById('addPlayer').addEventListener('click', addPlayer);
 	document.getElementById('startGame').addEventListener('click', startGame);
 }
 
+function show() {
+	window.alert('Hi')
+}
+
 function addPlayer() { 
 	anzahl++
+	
 	var button = document.getElementById('addPlayer')
-	var players = document.getElementById('names')
+	var board = document.getElementById('scoreboardColums')
 	
-	var newData = document.createElement('th')
-	var newPlayer = document.createElement('input')
-	newPlayer.placeholder = 'Spieler ' + anzahl
-	newPlayer.className = 'name'
-	newPlayer.id = 'name' + (anzahl - 1)
+	var newTD = document.createElement('td')
+	var newDiv = document.createElement('div')
+	var newInput = document.createElement('input')
+
+	newDiv.id = 'player' + anzahl
+	newDiv.className = 'player'
 	
-	var fragment = document.createDocumentFragment()
-	newData.appendChild(newPlayer)
-	fragment.appendChild(newData)
-	fragment.appendChild(button)
+	newInput.placeholder = 'Spieler ' + anzahl
+	newInput.id = 'name' + anzahl
+	newInput.className = 'name'
 	
-	players.appendChild(fragment)
-	newPlayer.focus()
+	newDiv.appendChild(newInput)
+	newTD.appendChild(newDiv)
+	board.appendChild(newTD)
+	board.appendChild(button.parentNode)
+	
 	if (anzahl > 7) {
-		button.innnerHTML = 'Max Spieler'
 		button.disabled = true
+		button.innerHTML = 'Max Spieler'
 	}
 }
 
-function clearScore() {
-	row = 0
-	
-	var scores = document.getElementById('scoreArea')
-	scores.innerHTML = ''
-	
-	addScoreRow()
-	
-	scores = document.getElementById('scoreSum')
-	scores.innerHTML = ''
-	var scoreRow = document.createElement('tr')
-	var valOuter
-	var valInner
-	for (var i = 0; i < anzahl; i++) {
-		valOuter = document.createElement('td')
-		valInner = document.createElement('input')
-		valInner.id = 'sum' + i
-		valInner.className = 'sum'
-		valInner.disabled = true
-		
-		valOuter.appendChild(valInner)
-		scoreRow.appendChild(valOuter)
+function clearScore() {	
+	var scores = document.getElementsByClassName('scoreRemove')
+
+	while (scores[0]) {
+		scores[0].remove() //scores[i].parentNode.removeChild(scores[i])
 	}
-	
-	scores.appendChild(scoreRow)
+
+	var players = document.getElementsByClassName('player')
+	var newInput
+	for (var i = 0; i < anzahl; i++) {
+		newInput = document.createElement('input')
+		newInput.disabled = true
+		newInput.className = 'sum scoreRemove'
+
+		players[i].appendChild(newInput)
+	}
+
+	addScoreRow()
 	updateSum()
 }
 
 function addScoreRow() {
-	var scores = document.getElementById('scoreArea')
-	var scoreRow = document.createElement('tr')
-	var valOuter
-	var valInner
-	for (var i = 0; i < anzahl; i++) {
-		valOuter = document.createElement('td')
-		valInner = document.createElement('input')
-		valInner.className = 'score' + i + ' row' + row
-		valInner.addEventListener('blur', rowFull)
+	var players = document.getElementsByClassName('player')
+	var newInput
+	var sum
+	for (i = 0; i < anzahl; i++) {
+		sum = players[i].lastChild
 		
-		valOuter.appendChild(valInner)
-		scoreRow.appendChild(valOuter)
+		sum.previousSibling.disabled = true
+		
+		newInput = document.createElement('input')
+		newInput.className = 'score scoreRemove'
+		newInput.length = 5
+		newInput.addEventListener('blur', rowFull)
+		
+		players[i].appendChild(newInput)
+		players[i].appendChild(sum)
 	}
 	
-	scores.appendChild(scoreRow)
-	scoreRow.firstChild.firstChild.focus()
-	row++
-	
-	var scores = document.getElementsByClassName('row' + (row-2))
-
-	for (var i = 0; i < scores.length; i++) {
-		scores[i].disabled = true
-	}
+	var columns = document.getElementById('scoreboardColums')
+	columns.firstElementChild.firstElementChild.lastElementChild.previousElementSibling.focus()
 }
 
 function rowFull() {
 	updateSum()
-	var rowList = document.getElementsByClassName('row' + (row - 1))
+	var sums = document.getElementsByClassName('sum')
 	for (var i = 0; i < anzahl; i++) {
-		if (rowList[i].value == '')
+		if (sums[i].previousElementSibling.value == '')
 			return
-		//rowList[i].removeEventListener('blur', rowFull)
 	}
 	addScoreRow()
 }
 
 function updateSum() {
-	var sum
-	var scores
-	var won
+	var sum, score
+	var players = document.getElementsByClassName('player')
 
 	for (var i = 0; i < anzahl; i++) {
 		sum = 0
-		scores = document.getElementsByClassName('score' + i)
-		for (var k = 0; k < scores.length; k++) {
-			sum += Number(scores[k].value)
+		score = players[i].firstElementChild.nextElementSibling
+		while (score.nextElementSibling) {
+			sum += Number(score.value)
+			score = score.nextElementSibling
 		}
-		document.getElementById('sum' + i).value = sum
+		score.value = sum
+	}
+	
+	checkChoke()
+}
+
+function checkChoke() {
+	var counter, score
+	var players = document.getElementsByClassName('player')
+
+	for (var i = 0; i < anzahl; i++) {
+		counter = 0
+		score = players[i].firstElementChild.nextElementSibling
+		while (score.nextElementSibling) {
+			if (score.value == '0') {
+				counter++
+			} else {
+				counter = 0
+			}
+			
+			switch (counter) {
+				case 2:
+					score.classList.add('chokeWarn')
+					score.previousElementSibling.classList.add('chokeWarn')
+					break;
+				case 3:
+					counter = 0
+					score.classList.add('choke')
+					score.previousElementSibling.classList.add('choke')
+					score.previousElementSibling.previousElementSibling.classList.add('choke')
+					break;
+			}
+			
+			score = score.nextElementSibling
+		}
 	}
 }
 
 function startGame() {
 	var buttonStart = document.getElementById('startGame')
 	buttonStart.innerHTML = 'Next Game'
+	buttonStart.removeEventListener('click', startGame)
+	buttonStart.addEventListener('click', nextGame)
 	
 	var buttonAdd = document.getElementById('addPlayer')
-	buttonAdd.parentNode.removeChild(buttonAdd)
-	buttonAdd = document.getElementById('addPlayerField')
-	buttonAdd.parentNode.removeChild(buttonAdd)
+	var buttonAddParent = buttonAdd.parentNode
 	
-	var players = document.getElementsByClassName('name')
-
-	for (var i = 0; i < players.length; i++) {
-		players[i].disabled = true
-	}
+	buttonAddParent.removeChild(buttonAdd)
+	buttonAddParent.parentNode.removeChild(buttonAddParent)
 	
 	clearScore()
-	
-	document.getElementById('startGame').addEventListener('click', nextGame);
 }
 
 function nextGame() {
-	var players = document.getElementById('names')
-	players.appendChild(players.children[0])
+	var boardColums = document.getElementById('scoreboardColums')
+	boardColums.appendChild(boardColums.firstElementChild)
 	
 	clearScore()
 }
