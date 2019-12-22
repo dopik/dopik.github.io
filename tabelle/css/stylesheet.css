@@ -8,7 +8,7 @@ body {
 #scoreBoard {
 	background-color: #342809;
 	border: solid 3px #000000;
-	border-radius: 10px;
+	border-radius: 1em;
 	width: 90vw;
 }
 

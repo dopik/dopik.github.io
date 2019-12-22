@@ -33,7 +33,7 @@ function addPlayer() {
 	newDiv.appendChild(newInput)
 	newTD.appendChild(newDiv)
 	board.appendChild(newTD)
-	board.appendChild(button.parentNode)
+	board.appendChild(button.parentNode.parentNode)
 	
 	if (anzahl > 7) {
 		button.disabled = true
