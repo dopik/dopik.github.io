@@ -9,10 +9,6 @@ function init() {
 	document.getElementById('startGame').addEventListener('click', startGame);
 }
 
-function show() {
-	window.alert('Hi')
-}
-
 function addPlayer() { 
 	anzahl++
 	
