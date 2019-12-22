@@ -68,6 +68,14 @@ input.choke {
 	background-color: #FF0000;
 }
 
+input.winner {
+	background-color: #00FF00;
+}
+
+input.loser {
+	background-color: #FF0000;
+}
+
 button {
 	background-color: #FCBA12;
 }

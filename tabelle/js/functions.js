@@ -2,7 +2,8 @@
 
 document.addEventListener('DOMContentLoaded', init)
 	
-var anzahl = 2;
+var anzahl = 2
+var won = false
 
 function init() {
 	document.getElementById('addPlayer').addEventListener('click', addPlayer);
@@ -61,6 +62,9 @@ function clearScore() {
 }
 
 function addScoreRow() {
+	if (win)
+		return
+	
 	var players = document.getElementsByClassName('player')
 	var newInput
 	var sum
@@ -104,9 +108,35 @@ function updateSum() {
 			score = score.nextElementSibling
 		}
 		score.value = sum
+		
+		if (sum > 10000)
+			checkWin()
 	}
 	
 	checkChoke()
+}
+
+function checkWin() {
+	won = true
+	
+	var scores = document.getElementsByClassName('sum')
+	var min,max = MAX_VALUE, MIN_VALUE
+	
+	for (var i = 0; i < anzahl; i++) {
+		min = Math.min(min, Number(scores[i].value))
+		max = Math.max(max, Number(scores[i].value))
+	}
+	
+	for (var i = 0; i < anzahl; i++) {
+		switch(Number(scores[i].value)) {
+			case min:
+				scores[i].classList.add('winner')
+				break;
+			case max:
+				scores[i].classList.add('loser')
+				break;
+		}
+	}
 }
 
 function checkChoke() {
@@ -159,6 +189,8 @@ function startGame() {
 }
 
 function nextGame() {
+	won = false
+	
 	var boardColums = document.getElementById('scoreboardColums')
 	boardColums.appendChild(boardColums.firstElementChild)
 	
