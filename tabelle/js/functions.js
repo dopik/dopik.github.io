@@ -31,7 +31,7 @@ function addPlayer() {
 	newDiv.appendChild(newInput)
 	newTD.appendChild(newDiv)
 	board.appendChild(newTD)
-	board.appendChild(button.parentNode.parentNode)
+	board.appendChild(button.parentElement.parentElement)
 	
 	if (anzahl > 7) {
 		button.disabled = true
@@ -43,7 +43,7 @@ function clearScore() {
 	var scores = document.getElementsByClassName('scoreRemove')
 
 	while (scores[0]) {
-		scores[0].remove() //scores[i].parentNode.removeChild(scores[i])
+		scores[0].remove() //scores[i].parentElement.removeChild(scores[i])
 	}
 
 	var players = document.getElementsByClassName('player')
@@ -109,7 +109,7 @@ function updateSum() {
 		}
 		score.value = sum
 		
-		if (sum >= 10000)
+		if (won || sum >= 10000)
 			checkWin()
 	}
 	
@@ -120,7 +120,8 @@ function checkWin() {
 	won = true
 	
 	var scores = document.getElementsByClassName('sum')
-	var min,max = MAX_VALUE, MIN_VALUE
+	var min = 90999
+	var max = 0
 	
 	for (var i = 0; i < anzahl; i++) {
 		min = Math.min(min, Number(scores[i].value))
@@ -130,10 +131,14 @@ function checkWin() {
 	for (var i = 0; i < anzahl; i++) {
 		switch(Number(scores[i].value)) {
 			case min:
-				scores[i].classList.add('winner')
+				scores[i].classList.add('loser')
 				break;
 			case max:
-				scores[i].classList.add('loser')
+				scores[i].classList.add('winner')
+				break;
+			default:
+				scores[i].classList.remove('winner')
+				scores[i].classList.remove('loser')
 				break;
 		}
 	}
@@ -178,8 +183,8 @@ function startGame() {
 	buttonStart.addEventListener('click', nextGame)
 	
 	var buttonAdd = document.getElementById('addPlayer')
-	var buttonAddParent = buttonAdd.parentNode
-	var buttanAddGrandParent = buttonAddParent.parentNode
+	var buttonAddParent = buttonAdd.parentElement
+	var buttanAddGrandParent = buttonAddParent.parentElement
 	
 	buttonAdd.remove()
 	buttonAddParent.remove()
