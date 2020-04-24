@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Random</title>
+		<script src="functions.js"></script>
+	</head>
+	<body>
+		<label>Würfel:
+			<select id="dice" size="7">
+				<option value='2'>D2 aka The Coin</option>
+				<option value='4'>D4</option>
+				<option value='6'>D6</option>
+				<option value='8'>D8</option>
+				<option value ="10">D10</option>
+				<option value='12'>D12</option>
+				<option value='20' selected>D20</option>
+			</select>
+		</label>
+		<label>Anzahl:
+			<input id="number" type="number" min="1" step="1" value="1"></input>
+		</label>
+		<button id="roll">Roll the dice!</button>
+		<output id="output"></output>
+	</body>
+</html>
